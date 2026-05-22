@@ -1,0 +1,349 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Risograph dark theme tokens ─────────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --charcoal: #1A1A1A;
+  --charcoal-mid: #242424;
+  --charcoal-light: #2E2E2E;
+
+  /* Riso overprint accents */
+  --riso-blue: #2B5FE3;
+  --riso-blue-dim: #1E43A8;
+  --riso-blue-glow: rgba(43, 95, 227, 0.15);
+  --riso-orange: #FF6B35;
+  --riso-orange-dim: #CC4F1F;
+  --riso-orange-glow: rgba(255, 107, 53, 0.15);
+  --riso-yellow: #F5C842;
+
+  /* Paper text tones */
+  --paper: #F0EDE6;
+  --paper-dim: #C4BFB5;
+  --paper-muted: #7A7570;
+
+  /* Rules / borders */
+  --rule: rgba(240, 237, 230, 0.15);
+  --rule-soft: rgba(240, 237, 230, 0.08);
+
+  /* Sentiment colors */
+  --positive: #4ADE80;
+  --neutral: #94A3B8;
+  --negative: #F87171;
+
+  /* Grain overlay */
+  --grain-opacity: 0.035;
+
+  /* Fonts */
+  --font-display: 'Unbounded', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Misregistration offset for riso feel */
+  --mis-x: 1.5px;
+  --mis-y: 1px;
+}
+
+/* ── Base reset ──────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--charcoal);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  /* Subtle grain texture overlay */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Typography utilities ────────────────────────────────────────────────── */
+.riso-heading {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--paper);
+}
+
+/* Riso "misregistration" text shadow effect */
+.riso-text-blue {
+  text-shadow:
+    calc(-1 * var(--mis-x)) calc(-1 * var(--mis-y)) 0 rgba(43, 95, 227, 0.5),
+    var(--mis-x) var(--mis-y) 0 rgba(255, 107, 53, 0.25);
+}
+
+.riso-text-orange {
+  text-shadow:
+    calc(-1 * var(--mis-x)) calc(-1 * var(--mis-y)) 0 rgba(255, 107, 53, 0.5),
+    var(--mis-x) var(--mis-y) 0 rgba(43, 95, 227, 0.25);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--riso-orange);
+}
+
+/* ── Component classes ───────────────────────────────────────────────────── */
+
+/* Card / panel */
+.riso-card {
+  background: var(--charcoal-mid);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+}
+
+/* Riso overprint card with double-border effect */
+.riso-card-accent {
+  background: var(--charcoal-mid);
+  border: 1px solid var(--riso-blue);
+  border-radius: 2px;
+  box-shadow:
+    3px 3px 0 var(--riso-orange),
+    0 0 24px var(--riso-blue-glow);
+}
+
+/* Input */
+.riso-input {
+  background: var(--charcoal-light);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease;
+  outline: none;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  resize: vertical;
+}
+
+.riso-input::placeholder {
+  color: var(--paper-muted);
+  opacity: 1;
+}
+
+.riso-input:focus {
+  border-color: var(--riso-blue);
+  box-shadow: 0 0 0 2px var(--riso-blue-glow);
+}
+
+/* Button */
+.riso-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.625rem 1.25rem;
+  border-radius: 2px;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  white-space: nowrap;
+}
+
+.riso-btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+}
+
+.riso-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.riso-btn-primary {
+  background: var(--riso-blue);
+  color: var(--paper);
+  box-shadow: 3px 3px 0 var(--riso-orange);
+}
+
+.riso-btn-primary:hover:not(:disabled) {
+  background: var(--riso-blue-dim);
+  box-shadow: 4px 4px 0 var(--riso-orange);
+}
+
+.riso-btn-secondary {
+  background: transparent;
+  color: var(--paper-dim);
+  border: 1px solid var(--rule);
+}
+
+.riso-btn-secondary:hover:not(:disabled) {
+  border-color: var(--paper-muted);
+  color: var(--paper);
+}
+
+/* Rule / divider */
+.riso-rule {
+  border: none;
+  border-top: 2px solid var(--riso-blue);
+  opacity: 0.4;
+  margin: 0;
+}
+
+.riso-rule-orange {
+  border-top-color: var(--riso-orange);
+}
+
+/* ── Sentiment pill badges ────────────────────────────────────────────────── */
+.pill-positive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1875rem 0.625rem;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--positive);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+}
+
+.pill-neutral {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1875rem 0.625rem;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--neutral);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.pill-negative {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1875rem 0.625rem;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--negative);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+}
+
+/* ── Bar chart animations ─────────────────────────────────────────────────── */
+@keyframes bar-grow-h {
+  from { width: 0; opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes bar-grow-v {
+  from { height: 0; opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-bar-h {
+  animation: bar-grow-h 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-bar-v {
+  animation: bar-grow-v 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease both;
+}
+
+/* Reduced motion: disable all custom animations */
+@media (prefers-reduced-motion: reduce) {
+  .animate-bar-h,
+  .animate-bar-v,
+  .animate-fade-up,
+  .animate-fade-in {
+    animation: none !important;
+  }
+
+  .riso-btn {
+    transition: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ── Scrollbar styling ───────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--charcoal);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--charcoal-light);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--paper-muted);
+}
+
+/* ── Code / mono text ────────────────────────────────────────────────────── */
+code, kbd, pre {
+  font-family: var(--font-mono);
+}
+
+/* ── Focus visible ───────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--riso-blue);
+  outline-offset: 2px;
+}
+
+/* ── Selection ───────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--riso-blue);
+  color: var(--paper);
+}

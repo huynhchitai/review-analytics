@@ -2,7 +2,7 @@
 
 Paste a batch of customer reviews — get sentiment, recurring themes, and an exportable report.
 
-> Portfolio Project #9 — [Tai Huynh](https://github.com/0CCHacker)
+> Portfolio Project #9 — [Tai Huynh](https://github.com/huynhchitai)
 
 ---
 

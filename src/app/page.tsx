@@ -538,9 +538,9 @@ export default function Home() {
               color: 'var(--paper-muted)',
             }}
           >
-            <a href="https://github.com/0CCHacker" className="hover:text-[var(--paper)] transition-colors">Tai Huynh</a>
+            <a href="https://github.com/huynhchitai" className="hover:text-[var(--paper)] transition-colors">Tai Huynh</a>
             <span className="mx-2" style={{ color: 'var(--rule)' }}>·</span>
-            <a href="https://github.com/0CCHacker" className="hover:text-[var(--paper)] transition-colors">github</a>
+            <a href="https://github.com/huynhchitai" className="hover:text-[var(--paper)] transition-colors">github</a>
             <span className="mx-2" style={{ color: 'var(--rule)' }}>·</span>
             <a href="mailto:huynhchitai.070306@gmail.com" className="hover:text-[var(--paper)] transition-colors">email</a>
           </p>
